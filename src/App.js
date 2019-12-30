@@ -31,6 +31,7 @@ class App extends Component{
   clearUser = ()=>{
     console.log("here");
     this.setState({users:[]});
+    this.setState({doShowClear:false});
   }
 
   getUsers = async (userName) =>{
@@ -46,7 +47,7 @@ class App extends Component{
   }
   
   render(){
-    if(this.state.users.length>0){
+  
       return(
         <div className="App">
           <Navbar title="GITHUB Finder"/>
@@ -55,13 +56,7 @@ class App extends Component{
             <Users users={this.state.users} /></div>
         </div>
       );
-    }else{
-      return(
-        <div>
-          <h2>no</h2>
-        </div>
-      );
-    }
+    
   
   }
 }
