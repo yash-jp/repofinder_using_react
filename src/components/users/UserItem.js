@@ -7,7 +7,7 @@ const UserItem = (props) => {
     <div className='card text-center'>
       <img className='round-img' src={avatar_url} alt='' style={{width:'60px'}}></img>
       <h2>{login}</h2>
-      <div><a href={html_url} className="btn btn-dark btn-sm my-1">More</a></div>
+      <div><a href={`/user/${login}`} className="btn btn-dark btn-sm my-1">More</a></div>
     </div>
   );
 };
