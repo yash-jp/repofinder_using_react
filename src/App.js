@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Navbar from './components/layout/Navbar';
 import './App.css';
 import UserItem from './components/users/UserItem';
 import Search from './components/users/Search';
 import Users from './components/users/Users';
+import User from './components/users/User';
+import About from './components/pages/About';
 import axios from 'axios';
 
 
@@ -47,17 +50,27 @@ class App extends Component{
   }
   
   render(){
-  
       return(
-        <div className="App">
-          <Navbar title="GITHUB Finder"/>
-          <div className="container">
-            <Search getUser={this.getUsers} clearUser={this.clearUser} doShowClear={this.state.doShowClear}/>
-            <Users users={this.state.users} /></div>
-        </div>
+        <Router>
+          <div className="App">
+            <Navbar title="GITHUB Finder"/>
+            <div className="container">
+              <Switch>
+                <Route exact path = '/' render={props => (
+                  <div>
+                    <Search getUser={this.getUsers} clearUser={this.clearUser} doShowClear={this.state.doShowClear}/>
+                    <Users users={this.state.users} />
+                  </div>
+                )}/>
+
+                <Route exact path = '/about' component={About}></Route>
+
+                <Route exact path = '/user' component={User}></Route>
+              </Switch>
+            </div>
+          </div>
+        </Router>
       );
-    
-  
   }
 }
 
