@@ -1,6 +1,7 @@
 import React,{Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import RepoItem from '../repos/RepoItem';
 
 class User extends Component{
   componentDidMount(){
@@ -10,11 +11,17 @@ class User extends Component{
 
 static proptype = {
   getUser : PropTypes.func.isRequired,
+  getUserRepo:PropTypes.func.isRequired,
   user : PropTypes.object.isRequired
 }
 
   render(){
     const { login,avatar_url,hireable,name,location,bio,html_url,blog,company,followers, following,public_repos, public_gists } = this.props.user;
+
+    const repos = this.props.repos;
+
+    console.log(repos);
+
     return(
       <div>
         <Link to={`/`} className="btn btn-light">Back</Link>
@@ -66,7 +73,16 @@ static proptype = {
 
                   <div className="badge badge-dark">Public Gists: {public_gists}</div>
         </div>
+
+        {
+          repos.map(repo => {
+            return <RepoItem repo={repo}/>
+          })
+        }
+
       </div>
+
+     
     );
   }
 }
