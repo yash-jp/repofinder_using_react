@@ -1,24 +1,19 @@
-import React,{Component, Fragment} from 'react';
+import React,{ Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RepoItem from '../repos/RepoItem';
 
-class User extends Component{
-  componentDidMount(){
-  this.props.getUser(this.props.match.params.login);
-  this.props.getUserRepo(this.props.match.params.login);
-}
+const User = (props) => {
+  const { getUser,getUserRepo,match,user,repos } = props;
 
-static proptype = {
-  getUser : PropTypes.func.isRequired,
-  getUserRepo:PropTypes.func.isRequired,
-  user : PropTypes.object.isRequired
-}
+  useEffect(()=>{
+    getUser(match.params.login);
+    getUserRepo(match.params.login);
+  },[]);
 
-  render(){
-    const { login,avatar_url,hireable,name,location,bio,html_url,blog,company,followers, following,public_repos, public_gists } = this.props.user;
+    const { login,avatar_url,hireable,name,location,bio,html_url,blog,company,followers, following,public_repos, public_gists } = user;
 
-    const repos = this.props.repos;
+    // const repos = this.props.repos;
 
     console.log(repos);
 
@@ -81,10 +76,13 @@ static proptype = {
         }
 
       </div>
-
-     
     );
   }
-}
+
+    User.proptype = {
+      getUser : PropTypes.func.isRequired,
+      getUserRepo:PropTypes.func.isRequired,
+      user : PropTypes.object.isRequired
+    }
 
 export default User;
